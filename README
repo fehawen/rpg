@@ -1,0 +1,48 @@
+rpg - random palette generator
+------------------------------
+
+Generate [almost] completely random palettes for your terminal's colors.
+
+They are almost random in the sense that certain min/max values have been
+set to achieve somewhat sane colors.
+
+The min/max values can be changed to your liking - feel free to hack away.
+
+
+Requirements
+------------
+
+In order to run rpg you need shuf (required) and xsetroot (optional).
+
+The first one - shuf - is used to generate random numbers for the RGB values.
+
+The second one - xsetroot - is entirely optional, and is used for setting the
+wallpaper color. If xsetroot is not installed, rpg will just ignore it and skip
+setting the wallpaper color.
+
+
+Install
+-------
+
+Clone the repo.
+
+    $ cd && git clone https://github.com/fehawen/rpg.git
+
+Run make to install. This will install rpg to ~/bin by default, because that's
+the way I like it. Do not run the command as root.
+
+    $ make install
+
+Add ~/.bin to your PATH if not already present.
+
+    export PATH=~/bin:$PATH
+
+Persist colors by adding the following to whichever shellrc you're using.
+
+    rpg reload
+
+
+Usage
+-----
+
+Run rpg without arguments for a list of available commands.
