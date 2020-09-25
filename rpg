@@ -4,7 +4,7 @@
 # rpg - random palette generator
 #
 
-add_sequence() {
+seq() {
     seqs="$seqs]$1;$2\\";
 
     case $1 in
@@ -14,6 +14,14 @@ add_sequence() {
             }
         ;;
     esac
+}
+
+exists() {
+    command -v "$1" >/dev/null
+}
+
+runs() {
+    pgrep -x "$1" >/dev/null
 }
 
 rgb() {
@@ -44,7 +52,7 @@ hex() {
 }
 
 
-print_palette() {
+current() {
     printf '\n'
 
     # This nifty thrifty syntax is borrowed from:
@@ -58,24 +66,7 @@ print_palette() {
     exit
 }
 
-main() {
-    mkdir -p "${cache_dir:=${HOME}/.cache/rpg}"
-
-    case $1 in
-        d|dark) ;;
-        l|light) light=1 ;;
-        r|reload) cat "$cache_dir/sequences" 2>/dev/null; exit ;;
-        c|current) print_palette ;;
-        *) printf '%s\n' \
-            "Usage: rpg [OPTION]" \
-            "  d, dark       Generate dark palette" \
-            "  l, light      Generate light palette" \
-            "  r, reload     Reload current palette" \
-            "  c, current    Print current palette"
-            exit
-        ;;
-    esac
-
+palette() {
     bg="$(hex "20" "30" "30" "40" "40" "50")"
     fg="$(hex "220" "230" "230" "240" "240" "250")"
     black="$(hex "60" "70" "70" "80" "80" "90")"
@@ -92,26 +83,26 @@ main() {
     blue="$(hex)"
     magenta="$(hex)"
     cyan="$(hex)"
+}
 
-    :> "$cache_dir/colors"
-
+sequences() {
     # Regular colors
-    add_sequence "4;0" "$bg"
-    add_sequence "4;1" "$red"
-    add_sequence "4;2" "$green"
-    add_sequence "4;3" "$yellow"
-    add_sequence "4;4" "$blue"
-    add_sequence "4;5" "$magenta"
-    add_sequence "4;6" "$cyan"
-    add_sequence "4;7" "$fg"
-    add_sequence "4;8" "$black"
-    add_sequence "4;9" "$red"
-    add_sequence "4;10" "$green"
-    add_sequence "4;11" "$yellow"
-    add_sequence "4;12" "$blue"
-    add_sequence "4;13" "$magenta"
-    add_sequence "4;14" "$cyan"
-    add_sequence "4;15" "$fg"
+    seq "4;0" "$bg"
+    seq "4;1" "$red"
+    seq "4;2" "$green"
+    seq "4;3" "$yellow"
+    seq "4;4" "$blue"
+    seq "4;5" "$magenta"
+    seq "4;6" "$cyan"
+    seq "4;7" "$fg"
+    seq "4;8" "$black"
+    seq "4;9" "$red"
+    seq "4;10" "$green"
+    seq "4;11" "$yellow"
+    seq "4;12" "$blue"
+    seq "4;13" "$magenta"
+    seq "4;14" "$cyan"
+    seq "4;15" "$fg"
 
     # Special colors
     # 10:  Foreground color
@@ -124,30 +115,68 @@ main() {
     # 257: Reversed cursor color
     # 258: Background color
     # 259: Foreground color
-    add_sequence "10" "$fg"
-    add_sequence "11" "$bg"
-    add_sequence "12" "$fg"
-    add_sequence "13" "$fg"
-    add_sequence "17" "$bg"
-    add_sequence "19" "$fg"
-    add_sequence "4;256" "$fg"
-    add_sequence "4;257" "$bg"
-    add_sequence "4;258" "$bg"
-    add_sequence "4;259" "$fg"
+    seq "10" "$fg"
+    seq "11" "$bg"
+    seq "12" "$fg"
+    seq "13" "$fg"
+    seq "17" "$bg"
+    seq "19" "$fg"
+    seq "4;256" "$fg"
+    seq "4;257" "$bg"
+    seq "4;258" "$bg"
+    seq "4;259" "$fg"
 
     # Unless VTE
     # 708: Border color
-    [ "$VTE_VERSION" ] || add_sequence "708" "$bg"
+    [ "$VTE_VERSION" ] || seq "708" "$bg"
+}
 
-    command -v xsetroot >/dev/null && xsetroot -solid "$black"
+wallpaper() {
+    if runs "picom" || runs "compton"; then
+        exists "hsetroot" && hsetroot -solid "$black"
+    else
+        exists "xsetroot" && xsetroot -solid "$black"
+    fi
+}
 
+activate() {
     for tty in /dev/pts/[0-9]*; do
         [ -w "$tty" ] && printf %b "$seqs" > "$tty" &
     done
 
     printf %b "$seqs" > "$cache_dir/sequences"
+}
 
-    print_palette
+main() {
+    mkdir -p "${cache_dir:=$HOME/.cache/rpg}"
+
+    case $1 in
+        g|generate) ;;
+        d|dark) ;;
+        l|light) light=1 ;;
+        r|reload) cat "$cache_dir/sequences" 2>/dev/null; exit ;;
+        c|current) current ;;
+        *) printf '%s\n' \
+            "Usage: rpg [OPTION]" \
+            "  d, dark       Generate dark palette" \
+            "  l, light      Generate light palette" \
+            "  r, reload     Reload current palette" \
+            "  c, current    Print current palette"
+            exit
+        ;;
+    esac
+
+    :> "$cache_dir/colors"
+
+    palette
+
+    sequences
+
+    wallpaper
+
+    activate
+
+    current
 }
 
 main "$@"
