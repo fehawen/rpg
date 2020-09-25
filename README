@@ -1,48 +1,64 @@
 rpg - random palette generator
 ------------------------------
 
-Generate [almost] completely random palettes for your terminal's colors.
+generate random palettes for your terminal's colors
 
-They are almost random in the sense that certain min/max values have been
-set to achieve somewhat sane colors.
-
-The min/max values can be changed to your liking - feel free to hack away.
+the palettes are random with the excpetion that min and max rgb values are
+used to achieve somewhat sane colors
 
 
-Requirements
+screenshots: https://user-images.githubusercontent.com/36552788/94266156-02e57680-ff3a-11ea-8acc-6899816fc24e.png
+             https://user-images.githubusercontent.com/36552788/94266242-26a8bc80-ff3a-11ea-8e7c-1f917ccc8a07.png
+
+
+dependencies
 ------------
 
-In order to run rpg you need shuf (required) and xsetroot (optional).
-
-The first one - shuf - is used to generate random numbers for the RGB values.
-
-The second one - xsetroot - is entirely optional, and is used for setting the
-wallpaper color. If xsetroot is not installed, rpg will just ignore it and skip
-setting the wallpaper color.
+* POSIX shell + mkdir, printf, pgrep and shuf
+* hsetroot (optional)
+    * used to set wallpaper color if picom or compton is running
+* xsetroot (optional)
+    * used to set wallpaper color otherwise
 
 
-Install
+install
 -------
 
-Clone the repo.
+clone rpg
 
-    $ cd && git clone https://github.com/fehawen/rpg.git
+    $ git clone https://github.com/fehawen/rpg.git
 
-Run make to install. This will install rpg to ~/bin by default, because that's
-the way I like it. Do not run the command as root.
+change working directory to rpg
+
+    $ cd rpg
+
+install rpg by running make install ***
 
     $ make install
 
-Add ~/.bin to your PATH if not already present.
+add ~/.bin to the PATH export in your shellrc if not already present
 
     export PATH=~/bin:$PATH
 
-Persist colors by adding the following to whichever shellrc you're using.
+persist colors by adding the following to your shellrc
 
     rpg reload
 
+*** installs to ~/bin by default, and make install should thus not run as root
 
-Usage
+
+uninstall
+---------
+
+uninstall rpg by running make uninstall
+
+    $ make uninstall
+
+
+usage
 -----
 
-Run rpg without arguments for a list of available commands.
+rpg d, rpg dark    - generate dark palette
+rpg l, rpg light   - generate light palette
+rpg r, rpg reload  - reload current palette
+rpg c, rpg current - print current palette
