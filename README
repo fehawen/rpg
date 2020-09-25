@@ -14,7 +14,7 @@ screenshots: https://user-images.githubusercontent.com/36552788/94266156-02e5768
 dependencies
 ------------
 
-* POSIX shell + mkdir, printf, pgrep and shuf
+* POSIX shell + mkdir, printf, pgrep, cat and shuf
 * hsetroot (optional)
     * used to set wallpaper color if picom or compton is running
 * xsetroot (optional)
