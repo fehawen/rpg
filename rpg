@@ -151,7 +151,6 @@ main() {
     mkdir -p "${cache_dir:=$HOME/.cache/rpg}"
 
     case $1 in
-        g|generate) ;;
         d|dark) ;;
         l|light) light=1 ;;
         r|reload) cat "$cache_dir/sequences" 2>/dev/null; exit ;;
