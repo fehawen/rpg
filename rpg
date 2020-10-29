@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -f
 
 #
 # rpg - random palette generator
@@ -25,14 +25,10 @@ runs() {
 }
 
 rgb() {
-    set -f
-
     # shellcheck disable=SC2046
     set -- $(shuf -i "$1"-"$2" -n 1)
 
     printf '%02x\n' "$1"
-
-    set +f
 }
 
 hex() {
@@ -140,7 +136,9 @@ wallpaper() {
 }
 
 activate() {
-    for tty in /dev/pts/[0-9]*; do
+    set +f
+    set -f -- /dev/pts/[0-9]*
+    for tty in "$@"; do
         [ -w "$tty" ] && printf %b "$seqs" > "$tty" &
     done
 
