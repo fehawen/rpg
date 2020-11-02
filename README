@@ -32,7 +32,7 @@ Change working directory to rpg
 
     $ cd rpg
 
-Install rpg [*]
+Install rpg ***
 
     $ make install
 
@@ -45,7 +45,7 @@ Persist colors by adding the following to your shellrc
     rpg reload
 
 
-* installs to ~/bin by default, and `make install` should thus not run as root.
+*** installs to ~/bin by default, and `make install` should thus not run as root.
 
 
 usage
