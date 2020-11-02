@@ -1,10 +1,10 @@
 rpg - random palette generator
 ------------------------------
 
-generate random palettes for your terminal's colors
+Generate random palettes for your terminal's colors.
 
-the palettes are random with the excpetion that min and max rgb values are
-used to achieve somewhat sane colors
+The palettes are random with the excpetion that min and max rgb values are
+used to achieve somewhat sane colors.
 
 
 screenshots: https://user-images.githubusercontent.com/36552788/94266156-02e57680-ff3a-11ea-8acc-6899816fc24e.png
@@ -14,7 +14,7 @@ screenshots: https://user-images.githubusercontent.com/36552788/94266156-02e5768
 dependencies
 ------------
 
-* POSIX shell + mkdir, printf, pgrep, cat and shuf
+* POSIX shell + mkdir, printf, pgrep, cat, shuf
 * hsetroot (optional)
     * used to set wallpaper color if picom or compton is running
 * xsetroot (optional)
@@ -24,35 +24,28 @@ dependencies
 install
 -------
 
-clone rpg
+Clone rpg
 
     $ git clone https://github.com/fehawen/rpg.git
 
-change working directory to rpg
+Change working directory to rpg
 
     $ cd rpg
 
-install rpg by running make install ***
+Install rpg [*]
 
     $ make install
 
-add ~/.bin to the PATH export in your shellrc if not already present
+Add ~/.bin to the PATH export in your shellrc if not already present
 
     export PATH=~/bin:$PATH
 
-persist colors by adding the following to your shellrc
+Persist colors by adding the following to your shellrc
 
     rpg reload
 
-*** installs to ~/bin by default, and make install should thus not run as root
 
-
-uninstall
----------
-
-uninstall rpg by running make uninstall
-
-    $ make uninstall
+* installs to ~/bin by default, and `make install` should thus not run as root.
 
 
 usage
