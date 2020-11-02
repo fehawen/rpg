@@ -11,20 +11,10 @@ screenshots: https://user-images.githubusercontent.com/36552788/94266156-02e5768
              https://user-images.githubusercontent.com/36552788/94266242-26a8bc80-ff3a-11ea-8e7c-1f917ccc8a07.png
 
 
-dependencies
-------------
-
-* POSIX shell + mkdir, printf, pgrep, cat, shuf
-* hsetroot (optional)
-    * used to set wallpaper color if picom or compton is running
-* xsetroot (optional)
-    * used to set wallpaper color otherwise
-
-
 install
 -------
 
-Clone rpg
+Clone the repo
 
     $ git clone https://github.com/fehawen/rpg.git
 
@@ -32,20 +22,20 @@ Change working directory to rpg
 
     $ cd rpg
 
-Install rpg ***
+Install rpg [*]
 
     $ make install
 
-Add ~/.bin to the PATH export in your shellrc if not already present
+Add ~/.bin to PATH in your $SHELL's startup file.
 
     export PATH=~/bin:$PATH
 
-Persist colors by adding the following to your shellrc
+Persist colors by adding the following in your $SHELL's startup file
 
     rpg reload
 
 
-*** installs to ~/bin by default, and `make install` should thus not run as root.
+[*] installs to ~/bin by default, and `make install` should thus not run as root.
 
 
 usage
