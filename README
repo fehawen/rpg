@@ -26,11 +26,11 @@ Install rpg [*]
 
     $ make install
 
-Add ~/.bin to PATH in your $SHELL's startup file.
+Add ~/.bin to PATH in $SHELL's startup file.
 
     export PATH=~/bin:$PATH
 
-Persist colors by adding the following in your $SHELL's startup file
+Persist colors by adding the following in $SHELL's startup file
 
     rpg reload
 
