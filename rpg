@@ -154,7 +154,7 @@ activate() {
 }
 
 main() {
-    mkdir -p "${cache_dir:=$HOME/.cache/rpg}"
+    mkdir -p "${cache_dir:=${COLOR_CACHE:=${HOME}/.cache/rpg}}"
 
     case $1 in
         d|dark) ;;
