@@ -4,18 +4,6 @@
 # rpg - random palette generator
 #
 
-seq() {
-    seqs="$seqs]$1;$2\\";
-
-    case $1 in
-        *";"*)
-            [ "${1##*;}" -lt 16 ] && {
-                printf '%s\n' "color${1##*;}=\"$2\"" >> "$cache_dir/colors"
-            }
-        ;;
-    esac
-}
-
 exists() {
     command -v "$1" >/dev/null
 }
@@ -48,20 +36,6 @@ hex() {
 }
 
 
-current() {
-    printf '\n'
-
-    for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
-        printf '\033[48;5;%sm  \033[m  ' "$i"
-
-        [ "$i" = 7 ] && printf '\n\n'
-    done
-
-    printf '\n\n'
-
-    exit
-}
-
 palette() {
     bg="$(hex "0" "10" "0" "10" "0" "10")"
     fg_dim="$(hex "180" "190" "180" "190" "180" "190")"
@@ -87,6 +61,18 @@ palette() {
     magenta_bright="$(hex)"
     cyan_dim="$(hex)"
     cyan_bright="$(hex)"
+}
+
+seq() {
+    seqs="$seqs]$1;$2\\";
+
+    case $1 in
+        *";"*)
+            [ "${1##*;}" -lt 16 ] && {
+                printf '%s\n' "color${1##*;}=\"$2\"" >> "$cache_dir/colors"
+            }
+        ;;
+    esac
 }
 
 sequences() {
@@ -151,6 +137,20 @@ activate() {
     done
 
     printf %b "$seqs" > "$cache_dir/sequences"
+}
+
+current() {
+    printf '\n'
+
+    for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+        printf '\033[48;5;%sm  \033[m  ' "$i"
+
+        [ "$i" = 7 ] && printf '\n\n'
+    done
+
+    printf '\n\n'
+
+    exit
 }
 
 main() {
