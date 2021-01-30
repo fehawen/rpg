@@ -66,10 +66,30 @@ palette() {
 seq() {
     seqs="$seqs]$1;$2\\";
 
+    color=${1##*;}
+
     case $1 in
         *";"*)
-            [ "${1##*;}" -lt 16 ] && {
-                printf '%s\n' "color${1##*;}=\"$2\"" >> "$cache_dir/colors"
+            [ "${color}" -eq 0 ] && {
+                printf '%s\n' \
+                    "*background: $2" \
+                    "*.background: $2" >> "$xresource_file"
+            }
+
+            [ "${color}" -eq 7 ] && {
+                printf '%s\n' \
+                    "*foreground: $2" \
+                    "*.foreground: $2" \
+                    "*cursorColor: $2" \
+                    "*.cursorColor: $2" >> "$xresource_file"
+            }
+
+            [ "${color}" -lt 16 ] && {
+                printf '%s\n' "color${color}=\"$2\"" >> "$colors_file"
+
+                printf '%s\n' \
+                    "*color${color}: $2" \
+                    "*.color${color}: $2" >> "$xresource_file"
             }
         ;;
     esac
@@ -136,7 +156,9 @@ activate() {
         [ -w "$tty" ] && printf %b "$seqs" > "$tty" &
     done
 
-    printf %b "$seqs" > "$cache_dir/sequences"
+    printf %b "$seqs" > "$sequence_file"
+
+    exists "xrdb" && xrdb -merge "$xresource_file"
 }
 
 current() {
@@ -154,24 +176,30 @@ current() {
 }
 
 main() {
-    mkdir -p "${cache_dir:=${COLOR_CACHE:=${HOME}/.cache/rpg}}"
+    mkdir -p "${cache_dir:=${HOME}/.cache/rpg}"
+
+    sequence_file="$cache_dir/sequences"
+    colors_file="$cache_dir/colors.sh"
+    xresource_file="$cache_dir/colors.Xresources"
 
     case $1 in
         d|dark) ;;
         l|light) light=1 ;;
-        r|reload) (cat "$cache_dir/sequences" 2>/dev/null &); exit ;;
+        r|reload) (cat "$sequence_file" 2>/dev/null &); exit ;;
         c|current) current ;;
         *) printf '%s\n' \
             "Usage: rpg [OPTION]" \
             "  d, dark       Generate dark palette" \
             "  l, light      Generate light palette" \
-            "  r, reload     Reload current palette" \
+            "  r, reload     Reload current palette *" \
+            "                * Not necessary if you use Xresources" \
             "  c, current    Print current palette"
             exit
         ;;
     esac
 
-    :> "$cache_dir/colors"
+    :> "$colors_file"
+    :> "$xresource_file"
 
     palette
 
