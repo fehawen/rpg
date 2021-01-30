@@ -159,7 +159,7 @@ main() {
     case $1 in
         d|dark) ;;
         l|light) light=1 ;;
-        r|reload) cat "$cache_dir/sequences" 2>/dev/null; exit ;;
+        r|reload) (cat "$cache_dir/sequences" 2>/dev/null &); exit ;;
         c|current) current ;;
         *) printf '%s\n' \
             "Usage: rpg [OPTION]" \
