@@ -191,8 +191,7 @@ main() {
             "Usage: rpg [OPTION]" \
             "  d, dark       Generate dark palette" \
             "  l, light      Generate light palette" \
-            "  r, reload     Reload current palette *" \
-            "                * Not necessary if you use Xresources" \
+            "  r, reload     Reload current palette" \
             "  c, current    Print current palette"
             exit
         ;;
