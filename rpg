@@ -20,13 +20,8 @@ rgb() {
 }
 
 hex() {
-    min=120
-    max=160
-
-    [ "$light" ] && {
-        min=100
-        max=140
-    }
+    min=80
+    max=120
 
     r=$(rgb "${1:-$min}" "${2:-$max}")
     g=$(rgb "${3:-$min}" "${4:-$max}")
@@ -38,29 +33,21 @@ hex() {
 
 palette() {
     bg="$(hex "0" "10" "0" "10" "0" "10")"
-    fg_dim="$(hex "180" "190" "180" "190" "180" "190")"
-    fg_bright="$(hex "240" "250" "240" "250" "240" "250")"
-    black="$(hex "60" "70" "60" "70" "60" "70")"
+    fg="$(hex "190" "200" "190" "200" "190" "200")"
+    black="$(hex "40" "50" "40" "50" "40" "50")"
 
     [ "$light" ] && {
         bg="$(hex "245" "250" "245" "250" "245" "250")"
-        fg_dim="$(hex "50" "60" "50" "60" "50" "60")"
-        fg_bright="$(hex "10" "20" "10" "20" "10" "20")"
+        fg="$(hex "20" "30" "20" "30" "20" "30")"
         black="$(hex "160" "170" "160" "170" "160" "170")"
     }
 
-    red_dim="$(hex)"
-    red_bright="$(hex)"
-    green_dim="$(hex)"
-    green_bright="$(hex)"
-    yellow_dim="$(hex)"
-    yellow_bright="$(hex)"
-    blue_dim="$(hex)"
-    blue_bright="$(hex)"
-    magenta_dim="$(hex)"
-    magenta_bright="$(hex)"
-    cyan_dim="$(hex)"
-    cyan_bright="$(hex)"
+    red="$(hex)"
+    green="$(hex)"
+    yellow="$(hex)"
+    blue="$(hex)"
+    magenta="$(hex)"
+    cyan="$(hex)"
 }
 
 seq() {
@@ -98,21 +85,21 @@ seq() {
 sequences() {
     # Regular colors
     seq "4;0" "$bg"
-    seq "4;1" "$red_dim"
-    seq "4;2" "$green_dim"
-    seq "4;3" "$yellow_dim"
-    seq "4;4" "$blue_dim"
-    seq "4;5" "$magenta_dim"
-    seq "4;6" "$cyan_dim"
-    seq "4;7" "$fg_dim"
+    seq "4;1" "$red"
+    seq "4;2" "$green"
+    seq "4;3" "$yellow"
+    seq "4;4" "$blue"
+    seq "4;5" "$magenta"
+    seq "4;6" "$cyan"
+    seq "4;7" "$fg"
     seq "4;8" "$black"
-    seq "4;9" "$red_bright"
-    seq "4;10" "$green_bright"
-    seq "4;11" "$yellow_bright"
-    seq "4;12" "$blue_bright"
-    seq "4;13" "$magenta_bright"
-    seq "4;14" "$cyan_bright"
-    seq "4;15" "$fg_bright"
+    seq "4;9" "$red"
+    seq "4;10" "$green"
+    seq "4;11" "$yellow"
+    seq "4;12" "$blue"
+    seq "4;13" "$magenta"
+    seq "4;14" "$cyan"
+    seq "4;15" "$fg"
 
     # Special colors
     # 10:  Foreground color
@@ -125,16 +112,16 @@ sequences() {
     # 257: Reversed cursor color
     # 258: Background color
     # 259: Foreground color
-    seq "10" "$fg_bright"
+    seq "10" "$fg"
     seq "11" "$bg"
-    seq "12" "$fg_bright"
-    seq "13" "$fg_bright"
+    seq "12" "$fg"
+    seq "13" "$fg"
     seq "17" "$bg"
-    seq "19" "$fg_dim"
-    seq "4;256" "$fg_bright"
+    seq "19" "$fg"
+    seq "4;256" "$fg"
     seq "4;257" "$bg"
     seq "4;258" "$bg"
-    seq "4;259" "$fg_bright"
+    seq "4;259" "$fg"
 
     # Unless VTE
     # 708: Border color
