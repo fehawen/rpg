@@ -26,16 +26,20 @@ Install rpg [*]
 
     $ make install
 
-Add ~/.bin to PATH in $SHELL's startup file.
+Add ~/.bin to PATH in $SHELL's startup file
 
     export PATH=~/bin:$PATH
 
-Persist colors by adding the following in $SHELL's startup file
+Persist colors either by adding the following in $SHELL's startup file ...
 
     rpg reload
 
+... Or by adding the following to ~/.Xresources if you use one
 
-[*] installs to ~/bin by default, and `make install` should thus not run as root.
+    #include ".cache/rpg/colors.Xresources"
+
+
+[*] installs to ~/bin by default, and `make install` should thus not run as root
 
 
 usage
