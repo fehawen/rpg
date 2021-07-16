@@ -1,5 +1,5 @@
 rpg - random palette generator
-------------------------------
+--------------------------------------------------------------------------------
 
 Generate random palettes for your terminal's colors.
 
@@ -12,7 +12,7 @@ screenshots: https://user-images.githubusercontent.com/36552788/94266156-02e5768
 
 
 install
--------
+--------------------------------------------------------------------------------
 
 Clone the repo
 
@@ -43,7 +43,7 @@ Persist colors either by adding the following in $SHELL's startup file ...
 
 
 usage
------
+--------------------------------------------------------------------------------
 
 rpg d, rpg dark    - generate dark palette
 rpg l, rpg light   - generate light palette
