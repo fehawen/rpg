@@ -5,7 +5,8 @@ all:
 
 install:
 	@mkdir -pv $(DESTDIR)$(PREFIX)/bin
-	@cp -pv rpg $(DESTDIR)$(PREFIX)/bin/rpg
+	@cp -p rpg $(DESTDIR)$(PREFIX)/bin/rpg
+	@chmod 755 $(DESTDIR)$(PREFIX)/bin/rpg
 	@echo Add \'~/bin\' to PATH.
 
 uninstall:
