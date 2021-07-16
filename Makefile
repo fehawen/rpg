@@ -1,4 +1,4 @@
-PREFIX ?= $(HOME)
+PREFIX ?= /usr
 
 all:
 	@echo Run \'make install\' to install rpg.
