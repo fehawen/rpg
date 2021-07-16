@@ -22,7 +22,7 @@ Change working directory to rpg
 
     $ cd rpg
 
-Install rpg [*]
+Install rpg
 
     $ make install
 
@@ -37,9 +37,6 @@ Persist colors either by adding the following in $SHELL's startup file ...
 ... Or by adding the following to ~/.Xresources if you use one
 
     #include ".cache/rpg/colors.Xresources"
-
-
-[*] installs to ~/bin by default, and `make install` should thus not run as root
 
 
 usage
