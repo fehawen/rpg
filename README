@@ -3,7 +3,7 @@ rpg - random palette generator
 
 Generate random palettes for your terminal's colors.
 
-The palettes are random with the excpetion that min and max rgb values are
+The palettes are random with the exception that min and max rgb values are
 used to achieve somewhat sane colors.
 
 
