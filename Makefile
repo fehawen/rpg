@@ -1,12 +1,12 @@
 PREFIX ?= /usr
+BINDIR ?= $(PREFIX)/bin
 
 all:
 	@echo Run \'make install\' to install rpg.
 
 install:
-	@mkdir -pv $(DESTDIR)$(PREFIX)/bin
-	@cp -p rpg $(DESTDIR)$(PREFIX)/bin/rpg
-	@chmod 755 $(DESTDIR)$(PREFIX)/bin/rpg
+	install -d $(DESTDIR)$(BINDIR)
+	install -m 755 rpg $(DESTDIR)$(BINDIR)
 
 uninstall:
-	@rm -fv $(DESTDIR)$(PREFIX)/bin/rpg
+	rm -f $(DESTDIR)$(BINDIR)/rpg
